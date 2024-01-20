@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BoutiqueController;
+use App\Http\Controllers\ProductController;
+use App\Models\ProductModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +25,5 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/{butik_name}',[BoutiqueController::class,'thisBoutique'])->name('thisBoutique');
+Route::post('{butik_name}',[BoutiqueController::class,'thisBoutique'])->name('thisBoutique');
+Route::get('/{product_name}/{id}',[ProductController::class,'thisProduct'])->name('thisProduct');

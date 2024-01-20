@@ -48,8 +48,8 @@
     <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-5">
             <a href="{{route('home')}}" class="text-decoration-none">
-                <span class="h1 text-uppercase text-primary bg-dark px-2">Butici</span>
-                <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">BanjaLuka</span>
+                <span class="h1 text-uppercase text-primary bg-dark px-2">@yield('naziv_jedan')</span>
+                <span class="h3 text-uppercase text-dark bg-primary px-2 ml-n1">@yield('naziv_dva')</span>
             </a>
         </div>
         <div class="col-lg-3 col-6 text-left">
@@ -70,3 +70,4 @@
         </div>
     </div>
 </div>
+
