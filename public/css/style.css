@@ -5533,10 +5533,13 @@ a.close.disabled {
         font-size: 10px;
     }
 
+
 }
 
 @media (min-width: 576px) {
-
+  #home{
+    display: none;
+  }
   .modal-dialog {
     max-width: 500px;
     margin: 1.75rem auto;

@@ -11,6 +11,8 @@
     <script src="js/main.js"></script>
 
     <body>
+        <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
     @yield('content')
 
     </body>

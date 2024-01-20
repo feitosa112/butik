@@ -2,6 +2,7 @@
     <div class="row bg-secondary py-1 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center h-100">
+                <a class="text-body mr-3" href="{{route('home')}}">Home</a>
                 <a class="text-body mr-3" href="">About</a>
                 <a class="text-body mr-3" href="">Contact</a>
 
@@ -46,7 +47,7 @@
     </div>
     <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-5">
-            <a href="" class="text-decoration-none">
+            <a href="{{route('home')}}" class="text-decoration-none">
                 <span class="h1 text-uppercase text-primary bg-dark px-2">Butici</span>
                 <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">BanjaLuka</span>
             </a>

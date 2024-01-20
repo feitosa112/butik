@@ -41,7 +41,7 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="{{route('home')}}" class="nav-item nav-link active">Home</a>
                         <a href="shop.html" class="nav-item nav-link">Shop</a>
                         <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
                         <div class="nav-item dropdown">
@@ -66,6 +66,7 @@
                 </div>
             </nav>
         </div>
+        <a href="{{route('home')}}" id="home" style="text-decoration: none">Pocetna</a>
     </div>
 </div>
 <!-- Navbar End -->
