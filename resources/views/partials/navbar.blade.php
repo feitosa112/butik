@@ -10,7 +10,7 @@
                 <div class="navbar-nav w-100">
                     <div class="nav-item dropdown dropright">
                         @foreach ($allCategories as $category)
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{$category->categories_name}} <i class="fa fa-angle-right float-right mt-1"></i></a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{$category->categories_name}} <i class="fa fa-angle-right float-right mt-1"></i></a>
                         @endforeach
                         <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                             <a href="" class="dropdown-item">Men's Dresses</a>

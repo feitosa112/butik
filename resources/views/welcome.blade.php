@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>welcome</h1>
+@include('templates.allBoutique')
+@include('templates.allCategories')
 
 @endsection

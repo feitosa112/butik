@@ -13,4 +13,9 @@ class CategoryModel extends Model
         'categories_name'
     ];
     use HasFactory;
+
+    public function products()
+    {
+        return $this->hasMany(ProductModel::class);
+    }
 }
