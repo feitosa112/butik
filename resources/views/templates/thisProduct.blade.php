@@ -43,11 +43,15 @@
             @csrf
             <p>Velicina:</p>
             <div style="display: flex;gap:10px;padding-bottom:15px">
-                <input type="radio" name="gender" value="s">S<br>
-                <input type="radio" name="gender" value="l">L<br>
-                <input type="radio" name="gender" value="xl">XL<br>
-                <input type="radio" name="gender" value="xxl">XXL<br>
+                <input type="radio" name="size" value="s">S<br>
+                <input type="radio" name="size" value="l">L<br>
+                <input type="radio" name="size" value="xl">XL<br>
+                <input type="radio" name="size" value="xxl">XXL<br>
             </div>
+
+            @error('size')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <p>Kolicina:</p>
             <div class="input-group quantity mb-5" style="width: 100px;">
                 <div class="input-group-btn">
@@ -55,7 +59,7 @@
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
-                <input class="quantityInput form-control form-control-sm text-center border-0" name="" type="text" value="1">
+                <input class="quantityInput form-control form-control-sm text-center border-0" name="quantity" type="text" value="1">
                 <div class="input-group-btn">
                     <button class="btn btn-sm btn-plus rounded-circle bg-light border plusBtn">
                         <i class="fa fa-plus"></i>
