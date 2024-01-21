@@ -39,8 +39,8 @@
                             @endif
                         </div>
                         <div class="card-footer" style="padding: 2px">
-                            <a href="#" style="border-radius: 5px" class="btn btn-primary btn-sm float-left mobile-button">Dodaj u korpu</a>
-                            <a href="#" style="border-radius: 5px" class="btn btn-success btn-sm float-right mobile-button">Naruči odmah</a>
+                            <a href="{{route('thisProduct',['product_name'=>$product_name,'id'=>$product->id])}}" style="border-radius: 5px" class="btn btn-primary btn-sm float-left mobile-button">Kupi</a>
+
                             <span class="float-right">
                                 <a href="#" class="ml-2 podnaslov" style="color:#40A2D8;text-decoration:none ">Sviđa mi se</a>
                             </span>
@@ -58,5 +58,5 @@
         @endforeach
     </div>
 </div>
-
+<a href="{{route('cartEmpty')}}">Isprazni</a>
 @endsection

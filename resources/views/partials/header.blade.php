@@ -27,6 +27,7 @@
 
         @include('partials.topbar-start')
         @include('partials.navbar')
+        @include('flash-message')
     </head>
 
 <body >
