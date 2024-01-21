@@ -17,4 +17,9 @@ class BoutiqueModel extends Model
         'email',
     ];
     use HasFactory;
+
+    public function products()
+    {
+        return $this->hasMany(ProductModel::class);
+    }
 }

@@ -25,26 +25,24 @@
             <div class="col-6 col-md-6 col-sm-6 col-lg-4 mb-2">
                 <?php $product_name= str_replace(' ','-',$product->product_name) ?>
                 <a href="{{route('thisProduct',['product_name'=>$product_name,'id'=>$product->id])}}" style="text-decoration: none">
-                    <div class="card" style="max-width: 300px">
+                    <div class="card" id="card" style="max-width: 300px">
 
                         <div class="card-header">
-                            <img src="/img/{{$product->img1}}" style="max-height: 200px" class="img-fluid card-img-top" alt="">
+                            <img src="/img/{{$product->img1}}" style="max-height: 200px" id="this_boutique_image" class="img-fluid card-img-top" alt="">
                         </div>
 
-                        <div class="card-body">
-                            <h3 class="card-title">{{$product->product_name}}</h3>
-                            <h4 class="card-subtitle mb-2 float-left" style="color: #65B741">{{$product->price}} KM</h4>
+                        <div class="card-body" style="padding: 0">
+                            <h3 class="card-title naslov">{{$product->product_name}}</h3>
+                            <h4 class="card-subtitle mb-2 float-left naslov" style="color: #65B741">{{$product->price}} KM</h4>
                             @if ($product->old_price !=null)
-                            <small class="card-subtitle mb-2 float-right" style="color: #B80000"><del>{{$product->old_price}} KM</del></small>
+                            <small class="card-subtitle mb-2 float-right podnaslov" style="color: #B80000"><del>{{$product->old_price}} KM</del></small>
                             @endif
                         </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-primary btn-sm float-left">Dodaj u košaricu</a>
-                            <a href="#" class="btn btn-success btn-sm float-right">Naruči odmah</a>
+                        <div class="card-footer" style="padding: 2px">
+                            <a href="#" style="border-radius: 5px" class="btn btn-primary btn-sm float-left mobile-button">Dodaj u korpu</a>
+                            <a href="#" style="border-radius: 5px" class="btn btn-success btn-sm float-right mobile-button">Naruči odmah</a>
                             <span class="float-right">
-                                <a href="#" class="text-warning">Dodaj u favorite</a>
-                                <span class="ml-2">&#9733;</span>
-                                <a href="#" class="ml-2 text-success">Sviđa mi se</a>
+                                <a href="#" class="ml-2 podnaslov" style="color:#40A2D8;text-decoration:none ">Sviđa mi se</a>
                             </span>
 
                         </div>

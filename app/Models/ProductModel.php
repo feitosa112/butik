@@ -28,4 +28,8 @@ class ProductModel extends Model
     {
         return $this->belongsTo(CategoryModel::class);
     }
+
+    public function boutique(){
+        return $this->belongsTo(BoutiqueModel::class);
+    }
 }

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function thisProduct($product_name,$id){
-        $product = ProductModel::where('id',$id)->get()->first();
+        $product = ProductModel::with('boutique')->find($id);
+
 
         return view('templates.thisProduct',compact('product'));
     }

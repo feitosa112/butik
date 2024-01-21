@@ -10,7 +10,7 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{$boutique->id}}">
 
-                                <div class="card" style="border-radius: 5%;box-shadow:0px 0px 5px rgba(0,0,0,0.5);">
+                                <div class="card" id="card" style="border-radius: 5%;box-shadow:0px 0px 5px rgba(0,0,0,0.5);">
 
                                     <div class="card-header">
                                         @if ($boutique->image != null)
@@ -18,21 +18,21 @@
                                         @endif
                                     </div>
 
-                                    <div class="card-body">
-                                        <p>{{$boutique->butik_name}}</p>
+                                    <div class="card-body naslov mt-2" style="padding: 0">
+                                        <h4 style="font-weight: 500">{{$boutique->butik_name}}</h4>
                                     </div>
 
-                                    <div class="card-footer">
+                                    <div class="card-footer podnaslov">
                                         <p class="float-left">
                                             <small>{{$boutique->address}}</small>
                                         </p>
 
-                                        <p class="float-right">
+                                        <p class="float-right podnaslov">
                                             @if ($boutique->phone != null)
                                                 <small>{{$boutique->phone}}</small>
                                             @endif
                                         </p>
-                                        <button class="btn btn-primary form-control" id="butik-submit" type="submit">Pogledaj</button>
+                                        <button class="btn btn-primary form-control" style="border-radius: 5px" id="butik-submit" type="submit">Pogledaj</button>
                                     </div>
                                 </div>
                             </form>
