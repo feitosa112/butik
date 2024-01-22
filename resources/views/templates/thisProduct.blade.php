@@ -39,8 +39,18 @@
         @endif
         <br>
 
-        <a href="{{route('addToCart',['id'=>$product->id])}}" class="btn btn-warning float-left">Dodaj u korpu</a>
+        <form action="{{route('addToCart',['id'=>$product->id])}}" method="POST">
+            @csrf
+            <input type="radio" name="size" value="S"> S<br>
+            <input type="radio" name="size" value="L"> L<br>
+            <input type="radio" name="size" value="XL"> XL<br>
+            <input type="radio" name="size" value="XXL"> XXL<br>
+        <button class="btn btn-warning float-left" type="submit">Dodaj u korpu</button>
 
+        </form>
+        @error('size')
+            <p style="color: red">{{$message}}</p>
+        @enderror
 
 
        </div>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductModel;
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
@@ -16,41 +16,68 @@ class ProductController extends Controller
         return view('templates.thisProduct',compact('product'));
     }
 
-    public function addToCart($id){
+    public function addToCart(Request $request, $id)
+    {
+        $request->validate([
+            'size' => 'required|in:S,L,XL,XXL',
+        ]);
+
+        // Find the product by ID
         $product = ProductModel::find($id);
-        if($product){
-            $cart = Session::get('cart',[]);
-            $cart[$id] = $product;
-            Session::put('cart',$cart);
 
+        if (!$product) {
+            return redirect()->back()->with('error', 'Product not found');
+        }
 
-            return redirect()->back()->with('success', 'Proizvod je dodat u korpu.');
+        // Create a unique identifier for the cart item (combination of product ID and size)
+        $cartItemId = $id . '_' . $request->input('size');
+
+        // Check if the cart session key exists
+        if (!Session::has('cart')) {
+            Session::put('cart', []);
         }
-        else
-        {
-            return redirect()->back()->with('amount', 'Proizvoda nema trenutno na stanju');
+        $cart = Session::get('cart');
+
+        // Check if the item is already in the cart
+        if (array_key_exists($cartItemId, $cart)) {
+            // If yes, increment the quantity
+            $cart[$cartItemId]['quantity']++;
+        } else {
+            // If not, add the product to the cart
+            $cart[$cartItemId] = [
+                'id' => $product->id,
+                'name' => $product->product_name,
+                'price' => $product->price,
+                'image'=>$product->img1,
+                'size' => $request->input('size'),
+                'quantity' => 1,
+            ];
         }
+
+        // Update the cart in the session
+        Session::put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Product added to cart');
     }
+
+
 
     public function cartView(){
         $cart = Session::get('cart',[]);
-        $total = 0;
-        foreach($cart as $product){
-            $total+=$product->price;
-        }
-        return view('cart',compact('cart','total'));
+
+        return view('cart',compact('cart'));
     }
 
 
 
 
 
-    // public function cartEmpty(){
-    //     $cart = Session::get('cart',[]);
+    public function cartEmpty(){
+        $cart = Session::get('cart',[]);
 
-    //     Session::forget('cart');
+        Session::forget('cart');
 
-    // }
+    }
 
 
 
