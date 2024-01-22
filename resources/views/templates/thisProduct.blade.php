@@ -38,6 +38,7 @@
 
         @endif
         <br>
+
         <a href="{{route('addToCart',['id'=>$product->id])}}" class="btn btn-warning float-left">Dodaj u korpu</a>
 
 

@@ -58,5 +58,5 @@
         @endforeach
     </div>
 </div>
-<a href="{{route('cartEmpty')}}">Isprazni</a>
+
 @endsection

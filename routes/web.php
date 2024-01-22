@@ -22,12 +22,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('addToCart');
+Route::get('/cart', [ProductController::class, 'cartView'])->name('cartView');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('{butik_name}',[BoutiqueController::class,'thisBoutique'])->name('thisBoutique');
-Route::get('/{product_name}/{id}',[ProductController::class,'thisProduct'])->name('thisProduct');
-Route::get('/add-to-cart/{id}',[ProductController::class,'addToCart'])->name('addToCart');
-Route::get('/cart',[ProductController::class,'cartView'])->name('cartView');
-Route::get('/cart-empty',[ProductController::class,'cartEmpty'])->name('cartEmpty');
+
+
+    Route::get('/{product_name}/{id}', [ProductController::class, 'thisProduct'])->name('thisProduct');
+    // Route::get('/cart-empty', [ProductController::class, 'cartEmpty'])->name('cartEmpty');
+
+
 
