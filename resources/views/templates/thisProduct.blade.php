@@ -61,16 +61,19 @@
 
 @section('scripts')
 <script>
-    var current=document.getElementById('current');
-    var slike=document.getElementsByClassName('second');
+   $(document).ready(function() {
+    // Selektovanje elemenata pomoću jQuery sintakse
+    var current = $('#current');
+    var slike = $('.second');
 
-    for(var i=0;i<slike.length;i++){
-    slike[i].addEventListener('click',display);
+    // Dodavanje event listenera na svaku sliku
+    slike.on('click', display);
+
+    function display() {
+        var sl = $(this).attr('src');
+        current.attr('src', sl);
     }
-    function display(){
-    var sl=this.getAttribute('src');
-    current.setAttribute('src',sl);
-    }
+});
 
 
 
