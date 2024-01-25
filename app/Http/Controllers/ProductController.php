@@ -94,6 +94,30 @@ class ProductController extends Controller
 
     }
 
+    public function checkoutView(Request $request){
+        $productId = $request->input('productId');
+    $size = $request->input('size');
+
+    $quantity = $request->input('quantity_'.$productId.'_'.$size);
+
+    // Ažuriranje količine u korpi (ovde implementirajte kako želite)
+    // Na primer, možete koristiti Session::put() ili ažurirati bazu podataka
+    // U ovom primeru, koristiću Session::put() za ilustraciju
+    $cart = Session::get('cart', []);
+
+    $cartKey = $productId . '_' . $size;
+
+    if (array_key_exists($cartKey, $cart)) {
+        $cart[$cartKey]['quantity'] = $quantity;
+        Session::put('cart', $cart);
+
+        return view('checkout',compact('cart'));
+
+    }
+
+    return response()->json(['success' => false, 'message' => 'Proizvod nije pronađen u korpi.']);
+}
+
 
 
 }

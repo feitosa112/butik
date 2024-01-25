@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-
+<!-- Cart Start -->
 <div class="container-fluid">
     <div class="row px-xl-5">
         <div class="col-lg-8 table-responsive mb-5">
             @if (count(Session::get('cart', []))==0)
-
             <div class="col-6 offset-1">
                 <div class="alert alert-info">
                     <p>Vasa korpa je trenutno prazna</p>
                 </div>
              </div>
 
-             @else
-             <form action="{{route('checkoutView')}}" method="POST">
-                @csrf
+            @else
+
+    <form action="{{route('checkoutView')}}" method="POST">
+
             <table class="table table-light table-borderless table-hover text-center mb-0">
                 <thead class="thead-dark">
                     <tr>
@@ -29,45 +29,50 @@
                 </thead>
 
                 <tbody class="align-middle">
-                    @foreach ($cart as $product)
-                        <tr>
-                            <input type="hidden" name="productId" value="{{$product['id']}}">
-                            <input type="hidden" name="size" value="{{$product['size']}}">
 
-                            <td class="align-middle"><img src="img/{{$product['image']}}" alt="" style="width: 50px;"> {{$product['name']}}</td>
-                            <td class="align-middle" id="price_{{$product['id']}}_{{$product['size']}}">{{$product['price']}}</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <p class="minus"  data-product-id="{{$product['id']}}" data-size="{{$product['size']}}">
-                                        <i class="fa fa-minus"></i>
-                                        </p>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" name="quantity_{{$product['id']}}_{{$product['size']}}" id="quantity_{{$product['id']}}_{{$product['size']}}" value="{{$product['quantity']}}">
-                                    <div class="input-group-btn">
-                                        <p class="plus" data-product-id="{{$product['id']}}" data-size="{{$product['size']}}">
-                                            <i class="fa fa-plus"></i>
-                                        </p>
-                                    </div>
+                    @foreach ($cart as $product)
+                    <tr>
+                        <td class="align-middle"><img src="img/{{$product['image']}}" alt="" style="width: 50px;"> {{$product['name']}}</td>
+                        <td class="align-middle" id="price_{{$product['id']}}_{{$product['size']}}">{{$product['price']}}</td>
+                        <td class="align-middle">
+                            <div class="input-group quantity mx-auto" style="width: 100px;">
+                                <div class="input-group-btn">
+                                    <p class="minus"  data-product-id="{{$product['id']}}" data-size="{{$product['size']}}">
+                                    <i class="fa fa-minus"></i>
+                                    </p>
                                 </div>
-                            </td>
-                            <td class="align-middle totalTable" id="totalTable_{{$product['id']}}_{{$product['size']}}">{{$product['price']}}</td>
-                            <td class="align-middle">{{$product['size']}}</td>
-                        </tr>
+                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" name="quantity_{{$product['id']}}_{{$product['size']}}" id="quantity_{{$product['id']}}_{{$product['size']}}" value="{{$product['quantity']}}">
+                                <div class="input-group-btn">
+                                    <p class="plus" data-product-id="{{$product['id']}}" data-size="{{$product['size']}}">
+                                        <i class="fa fa-plus"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle totalTable" id="totalTable_{{$product['id']}}_{{$product['size']}}">{{$product['price']}}</td>
+                        <td class="align-middle">{{$product['size']}}</td>
+                        {{-- <td class="align-middle">
+                            <form action="{{route('deleteProductFromCart',['id'=>$product['id']])}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="size" value="{{$product['size']}}">
+                                <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-times"></i></button>
+                            </form>
+                        </td> --}}
+                    </tr>
                     @endforeach
+
                 </tbody>
+
             </table>
+
             @if (count(Session::get('cart', [])) >0)
                 <a class="btn btn-info" href="{{route('cartEmpty')}}">Isprazni korpu</a>
-            @endif
-
-            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" type="submit">Proceed To Checkout</button>
-
-             </form>
             @endif
         </div>
 
         <div class="col-lg-4">
+
+
             <h5 class="section-title position-relative text-uppercase mb-3 form-control"><span class="bg-secondary pr-3">Cart Summary</span></h5>
             <div class="bg-light p-30 mb-5">
                 <div class="border-bottom pb-2">
@@ -91,17 +96,21 @@
                     </div>
 
 
+                    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" type="submit">Proceed To Checkout</button>
                 </div>
             </div>
+    </form>
+
         </div>
+        @endif
+
     </div>
 </div>
-
+<!-- Cart End -->
 @endsection
 
 @section('scripts')
 <script>
-    var csrfToken = $('meta[name="csrf-token"]').attr('content');
     $(document).ready(function(){
       updateTotalTable();
       $(document).on('click', '.minus', function(){
@@ -118,32 +127,14 @@
 
 
           function updateQuantity(productId, size, change) {
-    var inputQuantity = $('#quantity_' + productId + '_' + size);
-    var currentQuantity = parseInt(inputQuantity.val(), 10);
+              var inputQuantity = $('#quantity_' + productId + '_' + size);
+              var currentQuantity = parseInt(inputQuantity.val(), 10);
 
-    if (currentQuantity + change >= 1) {
-        // Ažuriranje količine u front-endu
-        inputQuantity.val(currentQuantity + change);
 
-        // Slanje Ajax zahteva za ažuriranje količine na serveru
-        $.ajax({
-            type: 'POST',
-            url: '/update-cart',
-            data: {
-                _token: csrfToken,
-                productId: productId,
-                size: size,
-                quantity: currentQuantity + change
-            },
-            success: function(response) {
-                // Ovde možete dodati dodatne korake ako je potrebno
-                console.log('Količina je uspešno ažurirana na serveru.');
-                updateCartSummary();
-            },
-            error: function(error) {
-                console.error('Došlo je do greške prilikom ažuriranja količine na serveru.');
-            }
-        });
+              if (currentQuantity + change >= 1) {
+                  inputQuantity.val(currentQuantity + change);
+                  updateTotalTable(productId, size);
+                  updateCartSummary();
               }
           }
 
