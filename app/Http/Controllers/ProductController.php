@@ -69,6 +69,19 @@ class ProductController extends Controller
     }
 
 
+    public function deleteProductFromCart(Request $request,$id) {
+        $size = $request->input('size');
+        $cart = Session::get('cart',[]);
+        if (isset($cart[$id.'_'.$size])){
+            unset($cart[$id.'_'.$size]);
+
+            Session::put('cart', $cart);
+            return redirect()->back()->with('deleteFromCart', 'Uspješno ste obrisali proizvod iz korpe');
+        }else{
+            return redirect()->back()->with('errorDeleteFromCart', 'Greška, pokušajte ponovno');
+        }
+
+    }
 
 
 

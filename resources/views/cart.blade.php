@@ -38,7 +38,13 @@
                         </td>
                         <td class="align-middle totalTable" id="totalTable_{{$product['id']}}_{{$product['size']}}">{{$product['price']}}</td>
                         <td class="align-middle">{{$product['size']}}</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                        <td class="align-middle">
+                            <form action="{{route('deleteProductFromCart',['id'=>$product['id']])}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="size" value="{{$product['size']}}">
+                                <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-times"></i></button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -122,7 +128,11 @@
              $('.subtotal').text(totalCart.toFixed(2));
 
             // Ažurirajte vrednost ukupne korpe
-            $('#totalCart').text(cijena.toFixed(2));
+            if($('.subtotal').text() == 0.00){
+                $('#totalCart').text('0.00');
+            }else{
+                $('#totalCart').text(cijena.toFixed(2));
+            }
 
 
 
