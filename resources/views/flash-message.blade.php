@@ -24,3 +24,12 @@
 </div>
 
 @endif
+
+@if ($message = Session::get('cartEmpty'))
+<div class="col-4 col-md-10 col-sm-10 offset-8">
+    <div class="alert alert-info" role="alert">
+        {{$message}}
+      </div>
+</div>
+
+@endif

@@ -9734,7 +9734,7 @@ a.text-dark:hover, a.text-dark:focus {
         font-size: 10px;
     }
     #this_boutique_image{
-        height: 60px;
+        height: 80px;
     }
     #butik-submit{
         max-width: 65px;
@@ -9745,7 +9745,7 @@ a.text-dark:hover, a.text-dark:focus {
     .mobile-button{
         height: 20px;
         width: 51px;
-        font-size: 7px;
+        font-size: 10px;
         padding: 1px;
     }
 

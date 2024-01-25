@@ -58,5 +58,4 @@
         @endforeach
     </div>
 </div>
-<a href="{{route('cartEmpty')}}">Isprazni korpu</a>
 @endsection

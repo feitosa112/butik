@@ -5,6 +5,14 @@
 <div class="container-fluid">
     <div class="row px-xl-5">
         <div class="col-lg-8 table-responsive mb-5">
+            @if (count(Session::get('cart', []))==0)
+            <div class="col-6 offset-1">
+                <div class="alert alert-info">
+                    <p>Vasa korpa je trenutno prazna</p>
+                </div>
+             </div>
+
+            @else
             <table class="table table-light table-borderless table-hover text-center mb-0">
                 <thead class="thead-dark">
                     <tr>
@@ -16,7 +24,9 @@
                         <th>Remove</th>
                     </tr>
                 </thead>
+
                 <tbody class="align-middle">
+
                     @foreach ($cart as $product)
                     <tr>
                         <td class="align-middle"><img src="img/{{$product['image']}}" alt="" style="width: 50px;"> {{$product['name']}}</td>
@@ -47,8 +57,14 @@
                         </td>
                     </tr>
                     @endforeach
+
                 </tbody>
+
             </table>
+
+            @if (count(Session::get('cart', [])) >0)
+                <a class="btn btn-info" href="{{route('cartEmpty')}}">Isprazni korpu</a>
+            @endif
         </div>
         <div class="col-lg-4">
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
@@ -72,6 +88,8 @@
                 </div>
             </div>
         </div>
+        @endif
+
     </div>
 </div>
 <!-- Cart End -->

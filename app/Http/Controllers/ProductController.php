@@ -90,6 +90,8 @@ class ProductController extends Controller
 
         Session::forget('cart');
 
+        return redirect()->back()->with('cartEmpty','Ispraznili ste korpu,zapocnite novu kupovinu');
+
     }
 
 
