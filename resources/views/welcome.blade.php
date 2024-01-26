@@ -1,16 +1,21 @@
 @extends('layouts.app')
+@section('title')
+ButikTrend
 
+@endsection
 @section('content')
 @section('naziv_jedan')
-Banja
+Butik
 
 @endsection
 
 @section('naziv_dva')
-Luka
+Trend
 
 @endsection
 @include('templates.allBoutique')
 @include('templates.allCategories')
 
 @endsection
+
+@include('partials.footer-view-all')

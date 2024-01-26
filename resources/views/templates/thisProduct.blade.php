@@ -122,4 +122,27 @@
 
 </script>
 @endsection
+@section('o_nama')
+{{$product->boutique->butik_name}}
+@endsection
+
+@section('footer_adresa')
+@if ($product->boutique->address != null)
+{{$product->boutique->address}}
+
+@endif
+
+@endsection
+
+@section('footer_email')
+@if ($product->boutique->email != null)
+{{$product->boutique->email}}
+
+@endif
+@endsection
+
+@if ($product->boutique->phone != null)
+{{$product->boutique->phone}}
+
+@endif
 

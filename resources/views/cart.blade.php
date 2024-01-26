@@ -30,31 +30,34 @@
 
                 <tbody class="align-middle">
                     @foreach ($cart as $product)
-                        <tr>
-                            <input type="hidden" name="productId" value="{{$product['id']}}">
-                            <input type="hidden" name="size" value="{{$product['size']}}">
+    <tr>
+        <input type="hidden" name="productId" value="{{$product['id']}}">
+                <input type="hidden" name="size" value="{{$product['size']}}">
+        <td>
+            <img src="img/{{$product['image']}}" alt="" style="width: 50px;"> {{$product['name']}}
+        </td>
+        <!-- Dodajte jedinstveni identifikator kao deo ID-a elementa -->
+        <td class="align-middle" id="price_{{$product['id']}}_{{$product['size']}}">{{$product['price']}}</td>
+        <td class="align-middle">
+            <div class="input-group quantity mx-auto" style="width: 100px;">
+                <div class="input-group-btn">
+                    <p class="minus" data-product-id="{{$product['id']}}" data-size="{{$product['size']}}">
+                        <i class="fa fa-minus"></i>
+                    </p>
+                </div>
+                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" name="quantity_{{$product['id']}}_{{$product['size']}}" id="quantity_{{$product['id']}}_{{$product['size']}}" value="{{$product['quantity']}}">
+                <div class="input-group-btn">
+                    <p class="plus" data-product-id="{{$product['id']}}" data-size="{{$product['size']}}">
+                        <i class="fa fa-plus"></i>
+                    </p>
+                </div>
+            </div>
+        </td>
+        <td class="align-middle totalTable" id="totalTable_{{$product['id']}}_{{$product['size']}}">{{$product['price']}}</td>
+        <td class="align-middle">{{$product['size']}}</td>
+    </tr>
+@endforeach
 
-                            <td class="align-middle"><img src="img/{{$product['image']}}" alt="" style="width: 50px;"> {{$product['name']}}</td>
-                            <td class="align-middle" id="price_{{$product['id']}}_{{$product['size']}}">{{$product['price']}}</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <p class="minus"  data-product-id="{{$product['id']}}" data-size="{{$product['size']}}">
-                                        <i class="fa fa-minus"></i>
-                                        </p>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" name="quantity_{{$product['id']}}_{{$product['size']}}" id="quantity_{{$product['id']}}_{{$product['size']}}" value="{{$product['quantity']}}">
-                                    <div class="input-group-btn">
-                                        <p class="plus" data-product-id="{{$product['id']}}" data-size="{{$product['size']}}">
-                                            <i class="fa fa-plus"></i>
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle totalTable" id="totalTable_{{$product['id']}}_{{$product['size']}}">{{$product['price']}}</td>
-                            <td class="align-middle">{{$product['size']}}</td>
-                        </tr>
-                    @endforeach
                 </tbody>
             </table>
             @if (count(Session::get('cart', [])) >0)
@@ -122,10 +125,8 @@
     var currentQuantity = parseInt(inputQuantity.val(), 10);
 
     if (currentQuantity + change >= 1) {
-        // Ažuriranje količine u front-endu
         inputQuantity.val(currentQuantity + change);
 
-        // Slanje Ajax zahteva za ažuriranje količine na serveru
         $.ajax({
             type: 'POST',
             url: '/update-cart',
@@ -136,16 +137,19 @@
                 quantity: currentQuantity + change
             },
             success: function(response) {
-                // Ovde možete dodati dodatne korake ako je potrebno
                 console.log('Količina je uspešno ažurirana na serveru.');
                 updateCartSummary();
+                updateTotalTable(productId, size);
             },
             error: function(error) {
                 console.error('Došlo je do greške prilikom ažuriranja količine na serveru.');
             }
         });
-              }
-          }
+        updateTotalTable(productId, size);
+                  updateCartSummary();
+    }
+}
+
 
           function updateTotalTable(productId, size){
               var inputQuantity = $('#quantity_' + productId + '_' + size).val();
@@ -193,3 +197,5 @@
   </script>
 
 @endsection
+
+@include('partials.footer-view-all')
